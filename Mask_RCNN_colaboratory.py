@@ -60,7 +60,7 @@ start_time = time.time()
 import cv2
 file_names = next(os.walk(IMAGE_DIR))[2]
 image = skimage.io.imread(os.path.join(IMAGE_DIR, random.choice(file_names)))
-image=cv2.imread("data/try.jpg")
+image=cv2.imread("data/try1.png")
 results = model.detect([image], verbose=1,)
 import json
 with open('data.json','w') as outfile:
@@ -100,7 +100,7 @@ def detect_spaces(image, data_cars,a,b):
     final_cal=val/(540-d1)
     print(final_cal)
     return final_cal
-    print(height,width)
+
 i=0
 for class_id in r['class_ids']:
     if class_names[class_id] in("car","truck","bicycle","bus"):
@@ -114,19 +114,20 @@ for class_id in r['class_ids']:
 
 k=0
 j=0
+
+
 for k in range(len(data_cars)):
-    for j in range(len(data_cars)):
+    for j in range(len(data_cars)-k):
         if k!=j:
             final_dist=detect_spaces(image,data_cars,k,j)
             if final_dist >- 0.575 and final_dist<-0.375:
                 print("parking space is available between",k," and ",j)
-
+            else:
+                print("parking space is not available between",k," and ",j)
 final_dist=detect_spaces(image,data_cars,0,2)
 
 if final_dist > -0.5 and final_dist<-0.375:
     print("parking space is available")
-
-
 
 visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
                             class_names, r['scores'])
@@ -134,3 +135,33 @@ visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'],
 i=0
 
 print(data_cars)
+
+def detect_accidents(image, data_cars):
+    init_time=time.time()
+    end_time=init_time+300
+    i=0
+    j=0
+    k=0
+    newer_data=[]
+    #init_pos=
+    new_data=[]
+    for i in range(len(data_cars)):
+        new_data.append(data_cars)
+        print(new_data)
+    for i in range(len(data_cars)):
+        new_data.append(data_cars)
+    i=0
+
+    time.sleep(5)
+    for i in range(len(data_cars)):
+        newer_data.append(data_cars)
+        if newer_data[i]==new_data[i]:
+            k+=1
+            j+=1
+
+    if j==1 and k<=ceil(len(new_data)*0.1) and len(new_data)>5:
+        print("ALARM")
+        
+
+
+detect_accidents(image,data_cars)
