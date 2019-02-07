@@ -60,7 +60,7 @@ start_time = time.time()
 import cv2
 file_names = next(os.walk(IMAGE_DIR))[2]
 image = skimage.io.imread(os.path.join(IMAGE_DIR, random.choice(file_names)))
-image=cv2.imread("data/try1.png")
+image=cv2.imread("park.png")
 results = model.detect([image], verbose=1,)
 import json
 with open('data.json','w') as outfile:
