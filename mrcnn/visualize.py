@@ -13,7 +13,7 @@ import logging
 import random
 import itertools
 import colorsys
-
+import cv2
 import numpy as np
 from skimage.measure import find_contours
 import matplotlib.pyplot as plt
@@ -164,7 +164,9 @@ def display_instances(image, boxes, masks, class_ids, class_names,
             verts = np.fliplr(verts) - 1
             p = Polygon(verts, facecolor="none", edgecolor=color)
             ax.add_patch(p)
-    ax.imshow(masked_image.astype(np.uint8))
+    cv2.imshow("Frame", masked_image.astype(np.uint8))
+    cv2.waitKey(1)
+    #ax.imshow(masked_image.astype(np.uint8))
     if auto_show:
         plt.show()
 
